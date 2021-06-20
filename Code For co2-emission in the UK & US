@@ -1,0 +1,102 @@
+ALTER TABLE co2_UK RENAME COLUMN per_capita to per_capita_uk;
+
+ALTER TABLE co2_US RENAME COLUMN per_capita to per_capita_us;
+
+SELECT entity, year, per_capita_us, MAX(per_capita_us) FROM co2_us
+GROUP BY entity, year;
+
+-- querying data
+
+SELECT * FROM co2_uk
+UNION 
+SELECT * FROM co2_us;
+
+ 
+-- the average of UK co2 emission per year
+
+SELECT entity, year, AVG(per_capita_uk) AS avg_per_capita_uk
+FROM co2_uk
+GROUP BY year;
+
+
+
+-- total percentage increase of co2_emission_increase in the United Kingdom compared to United States
+
+WITH cte_uk_co2 AS (SELECT co2_uk.entity, co2_uk.year, per_capita_uk, per_capita_uk - per_capita_us AS co2_emission_increase FROM co2_uk
+JOIN co2_us on co2_uk.year = co2_us.year),
+
+cte_us_co2 AS (SELECT entity, year, per_capita_us FROM co2_us)
+
+SELECT uk.entity, us.entity, uk.year, us.year, per_capita_uk, per_capita_us, ROUND(co2_emission_increase / per_capita_us * 100,2) AS co2_emission_increase FROM cte_uk_co2 uk
+JOIN cte_us_co2 us on us.year = uk.year;
+
+
+
+-- The total SUM per capita us compared to the uk (highest per every year) 
+
+WITH cte_co2_us AS (SELECT entity, year, MAX(per_capita_us) AS max_co2_us FROM co2_us
+GROUP BY entity, year
+ORDER BY year DESC), 
+
+cte_co2_uk AS (SELECT entity, year, MAX(per_capita_uk) AS max_co2_uk FROM co2_uk
+GROUP BY entity, year
+ORDER BY year DESC) 
+
+SELECT cte_co2_us.entity, cte_co2_us.year, SUM(max_co2_us) AS total_co2_emission_us, cte_co2_uk.entity, cte_co2_uk.year,SUM(max_co2_uk) AS total_co2_emission_uk FROM cte_co2_us 
+JOIN cte_co2_uk  ON cte_co2_uk.year = cte_co2_us.year
+GROUP BY cte_co2_us.entity, cte_co2_us.year, cte_co2_uk.year
+ORDER BY cte_co2_us.year;
+
+
+
+-- SELECT entity, year and per capita of UK (max) 
+
+SELECT uk.Entity, us.entity, uk.year, us.year, per_capita_uk, per_capita_us FROM co2_UK uk
+ JOIN co2_US us
+ on us.year = uk.year
+ WHERE per_capita_uk = (SELECT MAX(per_capita_uk) FROM co2_uk uk1 
+ JOIN co2_us us1 
+ ON uk1.year = us1.year 
+ WHERE uk1.year = uk.year AND uk1.entity = uk.entity)
+ORDER BY uk.year;
+
+
+
+-- cumulative total of both per capita for every year 
+
+SELECT us.entity, us.year, per_capita_us, SUM(per_capita_us) OVER(PARTITION BY us.entity ORDER BY per_capita_us DESC) AS 'cumluative per_capita_us'
+ FROM co2_us us
+JOIN co2_uk uk ON us.year = uk.year;
+
+
+-- Running the top 10 per capita in the united states
+
+WITH cte_rank_us AS (
+SELECT entity, year, per_capita_us, DENSE_RANK() OVER(PARTITION BY entity ORDER BY per_capita_us DESC) AS Dense_rank_us 
+FROM co2_us 
+)
+
+SELECT cte_rank_us.entity, cte_rank_us.year, per_capita_us, dense_rank_us FROM cte_rank_us 
+LIMIT 10;
+
+
+
+-- Running the top 10 per capita in the united kingdom
+
+WITH cte_rank_uk AS (
+SELECT entity, year, per_capita_uk, RANK() OVER(PARTITION BY entity ORDER BY per_capita_uk DESC) AS rank_uk
+ FROM co2_uk)
+ 
+ SELECT cte_rank_uk.entity, cte_rank_uk.year, per_capita_uk, rank_uk FROM cte_rank_uk 
+LIMIT 10;
+
+
+-- use CASE function to print out condition with small or big emmission of co2
+
+SELECT entity, year, per_capita_uk, CASE 
+WHEN per_capita_uk > 5 THEN 'big emission'
+WHEn per_capita_uk < 5 THEN 'small emission'
+END AS uk_per_capita 
+FROM co2_uk;
+
+
