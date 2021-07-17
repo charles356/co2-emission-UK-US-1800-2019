@@ -26,13 +26,13 @@ Form the data I had calculated, I had found the exact percentages of what human 
 
 The amount of carbon emissions trapped in our atmosphere causes global warming leading to climate change.
 
-Effects of climate change:
+**Effects of climate change:
 
  Increased heat, 
  
  drought,
  
- insect outbreaks.
+ insect outbreaks.**
 
 
 
