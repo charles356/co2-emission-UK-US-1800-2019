@@ -20,7 +20,7 @@ MYSQL: Importing the dataset into SQl, cleaning and transforming the data into u
 Tableau: Presented beautiful visulisations and statistics of how much co2 emission is extracted from the UK compared to the US. comparative bar charts and graphs are showcased. 
 
 
-My main motivation for this project was to see how exactly as human beings, a smaller country like the United kingdom compares to the 4th largest country in the world being the United States. 
+My main motivation for this project was to see how exactly as human beings, a smaller country like the United kingdom compares to the 4th largest country in the world that being the United States. 
 
 Form the data I had calculated I had found the exact percentages of what human activity per capita **(e.g road, Oil & natural gasses, agricultural Soils)** are shown to emphasize where exactly the high amounts of co2 emission is being taken out, having the purpose of finding ways to prevent larger kt (kilotons) of carbon footprint as global warming presents many environmental dangers to humans and animals. 
 
