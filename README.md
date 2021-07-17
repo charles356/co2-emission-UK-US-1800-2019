@@ -4,7 +4,7 @@ in the United Kingdom and the United States.
 
 **Resources**
 
-Link to dataset: https://ourworldindata.org/
+Link to dataset: https://ourworldindata.org/co2-emissions
 
 Link to Visulisation tool: https://public.tableau.com/app/profile/charles.muiruri
 
