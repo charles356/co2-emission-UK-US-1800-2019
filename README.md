@@ -34,7 +34,7 @@ The amount of carbon emissions trapped in our atmosphere causes global warming l
  
 ** insect outbreaks.**
 
-Overall, This project was made to display the dangerous amounts of co2 emmission being spread particulally how human activity compares from a smaller country to a larger country through statistical data and visulisations.
+Overall, This project was made to display the dangerous amounts of co2 emmission being spread particulally how human activity compares a smaller country (UK) to a larger country (US) through statistical data and visulisations.
 
 
 Created by Charles Muiruri
