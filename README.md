@@ -14,7 +14,7 @@ Tableau: Presented beautiful visulisations and statistics of how much co2 emissi
 
 My main motivation for this project was to see how exactly as human beings, a smaller country like the united kingdom compares to the 4th largest country in the world being the United States. 
 
-Percentages of what human activity per capita are shown to emphasies where the highest amount of co2 emission is being taken out having the purpose of finding ways to prevent larger amounts of carbon footprint as global warming presents many environmental dangers to humans and animals. The amount of carbon emissions trapped in our atmosphere causes global warming, which causes climate change,
+Form the data I had calculated I had leant, exact percentages of what human activity per capita **(road, Oail & natural gasses, agricultural Soils)** are shown to emphasies where the highest amount of co2 emission is being taken out having the purpose of finding ways to prevent larger amounts of carbon footprint as global warming presents many environmental dangers to humans and animals. The amount of carbon emissions trapped in our atmosphere causes global warming, which causes climate change,
 
 
 Created by Charles Muiruri
