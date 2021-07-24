@@ -12,7 +12,7 @@ UNION
 SELECT * FROM co2_us;
 
  
--- the average of UK co2 emission per year
+-- Average of UK co2 emission per year
 
 SELECT entity, year, AVG(per_capita_uk) AS avg_per_capita_uk
 FROM co2_uk
@@ -20,7 +20,7 @@ GROUP BY year;
 
 
 
--- total percentage increase of co2_emission_increase in the United Kingdom compared to United States
+-- Total percentage increase of co2_emission_increase in the United Kingdom compared to United States
 
 WITH cte_uk_co2 AS (SELECT co2_uk.entity, co2_uk.year, per_capita_uk, per_capita_uk - per_capita_us AS co2_emission_increase FROM co2_uk
 JOIN co2_us on co2_uk.year = co2_us.year),
@@ -62,7 +62,7 @@ ORDER BY uk.year;
 
 
 
--- cumulative total of both per capita for every year 
+-- Cumulative total of both per capita for every year 
 
 SELECT us.entity, us.year, per_capita_us, SUM(per_capita_us) OVER(PARTITION BY us.entity ORDER BY per_capita_us DESC) AS 'cumluative per_capita_us'
  FROM co2_us us
@@ -91,7 +91,7 @@ SELECT entity, year, per_capita_uk, RANK() OVER(PARTITION BY entity ORDER BY per
 LIMIT 10;
 
 
--- use CASE function to print out condition with small or big emmission of co2
+-- CASE function to print out condition with small or big emmission of co2
 
 SELECT entity, year, per_capita_uk, CASE 
 WHEN per_capita_uk > 5 THEN 'big emission'
